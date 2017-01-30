@@ -8604,6 +8604,21 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <rectangle x1="-3.42" y1="3.8" x2="-2.93" y2="5.3" layer="51"/>
 <rectangle x1="-4.69" y1="3.8" x2="-4.2" y2="5.3" layer="51"/>
 </package>
+<package name="SC70-3">
+<description>&lt;b&gt;SC-70 Package&lt;/b&gt; - Fairchild</description>
+<wire x1="-1.1" y1="0.6" x2="1.1" y2="0.6" width="0.2032" layer="51"/>
+<wire x1="1.1" y1="0.6" x2="1.1" y2="-0.6" width="0.2032" layer="21"/>
+<wire x1="1.1" y1="-0.6" x2="-1.1" y2="-0.6" width="0.2032" layer="51"/>
+<wire x1="-1.1" y1="-0.6" x2="-1.1" y2="0.6" width="0.2032" layer="21"/>
+<smd name="2" x="0" y="-0.95" dx="0.4" dy="0.6" layer="1"/>
+<smd name="CATHODE" x="0.65" y="0.95" dx="0.4" dy="0.6" layer="1"/>
+<smd name="ANODE" x="-0.65" y="0.95" dx="0.4" dy="0.6" layer="1"/>
+<text x="-1.27" y="1.4288" size="1.016" layer="25" ratio="18">&gt;NAME</text>
+<text x="-1.27" y="-2.2225" size="0.8128" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-0.15" y1="-1.1" x2="0.15" y2="-0.6" layer="51"/>
+<rectangle x1="0.5" y1="0.6" x2="0.8" y2="1.1" layer="51"/>
+<rectangle x1="-0.8" y1="0.6" x2="-0.5" y2="1.1" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="DAC7311">
@@ -8653,6 +8668,17 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <wire x1="17.78" y1="-22.86" x2="17.78" y2="22.86" width="0.254" layer="94"/>
 <wire x1="17.78" y1="22.86" x2="-17.78" y2="22.86" width="0.254" layer="94"/>
 </symbol>
+<symbol name="ADR5041BKSZ">
+<pin name="CATHODE" x="0" y="15.24" length="middle" rot="R270"/>
+<pin name="ANODE" x="0" y="0" length="middle" rot="R90"/>
+<wire x1="-2.54" y1="10.16" x2="0" y2="10.16" width="0.254" layer="94"/>
+<wire x1="0" y1="10.16" x2="2.54" y2="10.16" width="0.254" layer="94"/>
+<wire x1="2.54" y1="10.16" x2="2.54" y2="11.43" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="10.16" x2="-2.54" y2="8.89" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="2.54" y1="5.08" x2="0" y2="10.16" width="0.254" layer="94"/>
+<wire x1="0" y1="10.16" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="DAC7311">
@@ -8700,6 +8726,22 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <connect gate="G$1" pin="NC3" pad="11"/>
 <connect gate="G$1" pin="VDD1" pad="1"/>
 <connect gate="G$1" pin="VDD2" pad="16"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="ADR5041BKSZ">
+<gates>
+<gate name="G$1" symbol="ADR5041BKSZ" x="0" y="-5.08"/>
+</gates>
+<devices>
+<device name="" package="SC70-3">
+<connects>
+<connect gate="G$1" pin="ANODE" pad="ANODE"/>
+<connect gate="G$1" pin="CATHODE" pad="CATHODE"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -8975,7 +9017,6 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <part name="T5" library="zetex" deviceset="FMMT7*" device="" technology="20" value="FMMT734"/>
 <part name="R11" library="rcl" deviceset="R-US_" device="R0603" value="7K15"/>
 <part name="T6" library="zetex" deviceset="FMMT6*" device="" technology="24" value="FMMT634"/>
-<part name="IC5" library="texas" deviceset="LM4041" device="DBZ" technology="D12" value="ADR5041"/>
 <part name="C1" library="rcl" deviceset="C-EU" device="C1608" value="1uF"/>
 <part name="R12" library="rcl" deviceset="R-US_" device="R2512" value="2K2"/>
 <part name="R13" library="rcl" deviceset="R-US_" device="R2512" value="2K2"/>
@@ -9000,6 +9041,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <part name="TP5" library="testpad" deviceset="TP" device="PAD1-13Y"/>
 <part name="H1" library="holes" deviceset="MOUNT-HOLE" device="5.5"/>
 <part name="H2" library="holes" deviceset="MOUNT-HOLE" device="5.5"/>
+<part name="U$3" library="precision_tACS" deviceset="ADR5041BKSZ" device="" value="ADR5041"/>
 </parts>
 <sheets>
 <sheet>
@@ -9033,7 +9075,6 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <instance part="T6" gate="G$1" x="162.56" y="12.7"/>
 <instance part="IC1" gate="P" x="106.68" y="78.74"/>
 <instance part="IC3" gate="P" x="106.68" y="12.7"/>
-<instance part="IC5" gate="G$1" x="86.36" y="60.96"/>
 <instance part="C1" gate="G$1" x="71.12" y="-15.24"/>
 <instance part="R12" gate="G$1" x="152.4" y="45.72"/>
 <instance part="R13" gate="G$1" x="137.16" y="45.72"/>
@@ -9058,6 +9099,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <instance part="TP5" gate="G$1" x="17.78" y="-63.5"/>
 <instance part="H1" gate="G$1" x="-10.16" y="-15.24"/>
 <instance part="H2" gate="G$1" x="-10.16" y="-22.86"/>
+<instance part="U$3" gate="G$1" x="86.36" y="53.34"/>
 </instances>
 <busses>
 </busses>
@@ -9223,9 +9265,8 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <wire x1="96.52" y1="53.34" x2="96.52" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="A" pin="+IN"/>
 <wire x1="96.52" y1="81.28" x2="99.06" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="U$3" gate="G$1" pin="ANODE"/>
 <junction x="86.36" y="53.34"/>
-<pinref part="IC5" gate="G$1" pin="A"/>
-<wire x1="86.36" y1="58.42" x2="86.36" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$16" class="0">
@@ -9241,12 +9282,11 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <wire x1="86.36" y1="73.66" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="99.06" y1="68.58" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
 <junction x="99.06" y="68.58"/>
-<junction x="86.36" y="68.58"/>
 <pinref part="IC1" gate="P" pin="V-"/>
 <wire x1="106.68" y1="71.12" x2="106.68" y2="68.58" width="0.1524" layer="91"/>
 <junction x="106.68" y="68.58"/>
-<pinref part="IC5" gate="G$1" pin="C"/>
-<wire x1="86.36" y1="63.5" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="U$3" gate="G$1" pin="CATHODE"/>
+<junction x="86.36" y="68.58"/>
 </segment>
 </net>
 <net name="N$18" class="0">

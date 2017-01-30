@@ -8980,7 +8980,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <part name="R12" library="rcl" deviceset="R-US_" device="R2512" value="2K2"/>
 <part name="R13" library="rcl" deviceset="R-US_" device="R2512" value="2K2"/>
 <part name="IC6" library="linear" deviceset="REF03" device="D" value="REF5050AIDR"/>
-<part name="IC7" library="linear" deviceset="78L*SMD" device="" technology="05" value="L78L05"/>
+<part name="IC7" library="linear" deviceset="78L*SMD" device="" technology="05"/>
 <part name="C2" library="rcl" deviceset="C-EU" device="C1608" value="1uF"/>
 <part name="C3" library="rcl" deviceset="C-EU" device="C1608" value="1uF"/>
 <part name="TP6" library="testpad" deviceset="TP" device="PAD1-13Y"/>

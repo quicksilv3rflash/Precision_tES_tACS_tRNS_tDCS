@@ -1,0 +1,16 @@
+DAC write code  | OUTPUT current
+0x0200		| -0.13mA
+0x051A		| -0.35mA
+0x0550		| -0.37mA
+0x0590		| -0.39mA
+0x05B0		| +2.08mA
+0x05F0		| +2.06mA
+0x06D0		| +2.00mA
+0x22C8		| +0.00mA
+0x3E80		| -1.98mA
+0x3EC0		| -2.00mA
+0x3F00		| -2.01mA
+0x3FA0		| -2.06mA
+0x3FD0		| -2.07mA
+0x3FFF		| -2.09mA (Double-check this value after replacing multimeter battery and watch carefully for stability over 10 minute period)
+
