@@ -9041,7 +9041,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <part name="TP5" library="testpad" deviceset="TP" device="PAD1-13Y"/>
 <part name="H1" library="holes" deviceset="MOUNT-HOLE" device="5.5"/>
 <part name="H2" library="holes" deviceset="MOUNT-HOLE" device="5.5"/>
-<part name="U$3" library="precision_tACS" deviceset="ADR5041BKSZ" device=""/>
+<part name="U$3" library="precision_tACS" deviceset="ADR5041BKSZ" device="" value="ADR5041"/>
 </parts>
 <sheets>
 <sheet>
@@ -9267,6 +9267,10 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <wire x1="96.52" y1="81.28" x2="99.06" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="U$3" gate="G$1" pin="ANODE"/>
 <junction x="86.36" y="53.34"/>
+<pinref part="IC1" gate="P" pin="V-"/>
+<wire x1="96.52" y1="53.34" x2="106.68" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="53.34" x2="106.68" y2="71.12" width="0.1524" layer="91"/>
+<junction x="96.52" y="53.34"/>
 </segment>
 </net>
 <net name="N$16" class="0">
@@ -9274,17 +9278,13 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <pinref part="IC1" gate="B" pin="+IN"/>
 <wire x1="121.92" y1="81.28" x2="119.38" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="81.28" x2="119.38" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="119.38" y1="68.58" x2="106.68" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="68.58" x2="99.06" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="A" pin="-IN"/>
-<wire x1="106.68" y1="68.58" x2="99.06" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="99.06" y1="68.58" x2="99.06" y2="76.2" width="0.1524" layer="91"/>
 <pinref part="R11" gate="G$1" pin="1"/>
 <wire x1="86.36" y1="73.66" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="99.06" y1="68.58" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
 <junction x="99.06" y="68.58"/>
-<pinref part="IC1" gate="P" pin="V-"/>
-<wire x1="106.68" y1="71.12" x2="106.68" y2="68.58" width="0.1524" layer="91"/>
-<junction x="106.68" y="68.58"/>
 <pinref part="U$3" gate="G$1" pin="CATHODE"/>
 <junction x="86.36" y="68.58"/>
 </segment>

@@ -9071,7 +9071,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <instance part="R10" gate="G$1" x="55.88" y="30.48" rot="R90"/>
 <instance part="T4" gate="G$1" x="63.5" y="68.58"/>
 <instance part="T5" gate="G$1" x="162.56" y="63.5"/>
-<instance part="R11" gate="G$1" x="86.36" y="78.74" rot="R90"/>
+<instance part="R11" gate="G$1" x="86.36" y="63.5" rot="R90"/>
 <instance part="T6" gate="G$1" x="162.56" y="12.7"/>
 <instance part="IC1" gate="P" x="106.68" y="78.74"/>
 <instance part="IC3" gate="P" x="106.68" y="12.7"/>
@@ -9083,7 +9083,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <instance part="C2" gate="G$1" x="114.3" y="-15.24"/>
 <instance part="C3" gate="G$1" x="58.42" y="-15.24"/>
 <instance part="TP6" gate="G$1" x="129.54" y="50.8"/>
-<instance part="TP7" gate="G$1" x="78.74" y="50.8"/>
+<instance part="TP7" gate="G$1" x="71.12" y="50.8"/>
 <instance part="TP8" gate="G$1" x="45.72" y="50.8"/>
 <instance part="TP9" gate="G$1" x="-5.08" y="88.9"/>
 <instance part="TP10" gate="G$1" x="17.78" y="7.62"/>
@@ -9099,7 +9099,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <instance part="TP5" gate="G$1" x="17.78" y="-63.5"/>
 <instance part="H1" gate="G$1" x="-10.16" y="-15.24"/>
 <instance part="H2" gate="G$1" x="-10.16" y="-22.86"/>
-<instance part="U$3" gate="G$1" x="86.36" y="53.34"/>
+<instance part="U$3" gate="G$1" x="86.36" y="71.12"/>
 </instances>
 <busses>
 </busses>
@@ -9173,13 +9173,12 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="165.1" y1="83.82" x2="165.1" y2="86.36" width="0.1524" layer="91"/>
 <wire x1="165.1" y1="86.36" x2="106.68" y2="86.36" width="0.1524" layer="91"/>
-<pinref part="R11" gate="G$1" pin="2"/>
 <wire x1="106.68" y1="86.36" x2="86.36" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="86.36" x2="55.88" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="83.82" x2="86.36" y2="86.36" width="0.1524" layer="91"/>
-<junction x="86.36" y="86.36"/>
 <pinref part="IC1" gate="P" pin="V+"/>
 <junction x="106.68" y="86.36"/>
+<pinref part="U$3" gate="G$1" pin="CATHODE"/>
+<wire x1="86.36" y1="86.36" x2="55.88" y2="86.36" width="0.1524" layer="91"/>
+<junction x="86.36" y="86.36"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -9220,7 +9219,7 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <pinref part="TP8" gate="G$1" pin="TP"/>
 <wire x1="45.72" y1="48.26" x2="55.88" y2="48.26" width="0.1524" layer="91"/>
 <pinref part="TP7" gate="G$1" pin="TP"/>
-<wire x1="78.74" y1="48.26" x2="66.04" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="48.26" x2="66.04" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$12" class="0">
@@ -9255,37 +9254,19 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <wire x1="154.94" y1="63.5" x2="160.02" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$15" class="0">
-<segment>
-<pinref part="T4" gate="G$1" pin="E"/>
-<wire x1="66.04" y1="73.66" x2="76.2" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="73.66" x2="76.2" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="53.34" x2="86.36" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="53.34" x2="96.52" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="53.34" x2="96.52" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="A" pin="+IN"/>
-<wire x1="96.52" y1="81.28" x2="99.06" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="U$3" gate="G$1" pin="ANODE"/>
-<junction x="86.36" y="53.34"/>
-</segment>
-</net>
 <net name="N$16" class="0">
 <segment>
 <pinref part="IC1" gate="B" pin="+IN"/>
 <wire x1="121.92" y1="81.28" x2="119.38" y2="81.28" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="81.28" x2="119.38" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="119.38" y1="68.58" x2="106.68" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="119.38" y1="68.58" x2="99.06" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="A" pin="-IN"/>
-<wire x1="106.68" y1="68.58" x2="99.06" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="99.06" y1="68.58" x2="99.06" y2="76.2" width="0.1524" layer="91"/>
-<pinref part="R11" gate="G$1" pin="1"/>
-<wire x1="86.36" y1="73.66" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="R11" gate="G$1" pin="2"/>
 <wire x1="99.06" y1="68.58" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
 <junction x="99.06" y="68.58"/>
-<pinref part="IC1" gate="P" pin="V-"/>
-<wire x1="106.68" y1="71.12" x2="106.68" y2="68.58" width="0.1524" layer="91"/>
-<junction x="106.68" y="68.58"/>
-<pinref part="U$3" gate="G$1" pin="CATHODE"/>
+<pinref part="U$3" gate="G$1" pin="ANODE"/>
+<wire x1="86.36" y1="68.58" x2="86.36" y2="71.12" width="0.1524" layer="91"/>
 <junction x="86.36" y="68.58"/>
 </segment>
 </net>
@@ -9575,6 +9556,25 @@ Source: http://www.analog.com/static/imported-files/data_sheets/AD745.pdf</descr
 <pinref part="U$2" gate="G$1" pin="A3"/>
 <wire x1="17.78" y1="-66.04" x2="25.4" y2="-58.42" width="0.1524" layer="91"/>
 <wire x1="25.4" y1="-58.42" x2="55.88" y2="-58.42" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="T4" gate="G$1" pin="E"/>
+<wire x1="66.04" y1="73.66" x2="76.2" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="73.66" x2="76.2" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="53.34" x2="96.52" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="A" pin="+IN"/>
+<wire x1="96.52" y1="81.28" x2="99.06" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="P" pin="V-"/>
+<wire x1="96.52" y1="53.34" x2="106.68" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="53.34" x2="106.68" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="53.34" x2="86.36" y2="53.34" width="0.1524" layer="91"/>
+<junction x="96.52" y="53.34"/>
+<pinref part="R11" gate="G$1" pin="1"/>
+<wire x1="86.36" y1="53.34" x2="96.52" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="58.42" x2="86.36" y2="53.34" width="0.1524" layer="91"/>
+<junction x="86.36" y="53.34"/>
 </segment>
 </net>
 </nets>
