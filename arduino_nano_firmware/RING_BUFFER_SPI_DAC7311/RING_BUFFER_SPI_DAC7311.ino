@@ -5,7 +5,7 @@
  * Python 3.2.5
  * PySerial 2.6
  * SYSTEM DEVELOPED ON ARDUINO HARDWARE: 
- * "NANO V3.0 Clone" 5V
+ * "MINI USB Nano V3.0 ATmega328P CH340G 5V 16M"
  */
 
 //This ring buffer takes data from USB > serial and stores it.
@@ -20,27 +20,42 @@
 //After many hours of poking and prodding, I have decided that this code,
 //which appears stable, is sufficient.
 
+
  
 #include <SPI.h> // necessary library for SPI data transmission to DAC7311
 
-
 static uint8_t cs = 10; // using digital pin 10 for DAC7311 chip select
 
+volatile uint8_t loadpoint = 0;     //the index of the location in databuffer[]
+                                    //that our loaded data goes up to (moves up as we write)
 
-volatile uint8_t loadpoint = 0;
-volatile uint8_t readpoint = 0;
+volatile uint8_t readpoint = 0;     //the index of the location in databuffer[]
+                                    //that we haven't read above (moves up as we read)
 
-volatile uint16_t databuffer[256]; //initialize buffer array
-volatile uint8_t should_send = 0;
+volatile uint16_t databuffer[256];  //our buffer array of unsigned 16-bit integers
+
+volatile uint8_t should_send = 0;   //this gets set to 1 every 512us by an interrupt.
+                                    //It's polled/reset to 0 in loop()
 
 
 
 //-------------------------------------------------------------------------------
 //  INTERRUPT SERVICE ROUTINE (FANCY SPECIAL FUNCTION):
 //
-//  WHEN TIMER2 OVERFLOWS, NO MATTER WHERE WE ARE, WE GO HERE,
+//  WHEN TIMER2 OVERFLOWS, NO MATTER WHERE WE ARE**, WE GO HERE,
 //  SET THE VOLATILE GLOBAL VARIABLE "should_send" TO 1,
 //  AND THEN WE GO BACK TO WHATEVER WE WERE DOING BEFORE
+//
+// **except within certain parts of the Serial library. Unless
+// you feel like going through a lot of TIMSK register descriptions in the
+// 660-page ATMEGA328P datasheet, and cross-referencing them with the
+// interrupt register bits set in the Arduino Serial library files,
+// just... don't worry about it.
+// However, as a result of interference by all the hidden interrupt
+// timing/permissions/disabling/enabling that takes place in the Arduino Serial library...
+// Don't set timer2 any faster than it's set in   setup() !
+// (timer2 overflow interrupt every 512us)
+// SPEEDING UP TIMER2 WILL NOT INCREASE THE OUTPUT SAMPLE RATE AS YOU WOULD EXPECT!!
 //-------------------------------------------------------------------------------
 ISR(TIMER2_OVF_vect){           //When timer2 overflows,
   should_send = 1;              //it's time to send more data to the DAC.
@@ -91,7 +106,7 @@ void load_data_if_available(void){      //Loads data, as long as there is data t
     uint8_t highbyte = Serial.read();   //First we save the high byte, then
     uint8_t lowbyte = Serial.read();    //We save the low byte, and
     loadpoint++;                        //We increment the load pointer.
-    
+                                            
                                         //"RING BUFFER" : Incrementing moves loadpoint up one slot,
                                         //away from readpoint -- the space below loadpoint
                                         //but above readpoint is where the buffer lives; therefore
@@ -99,6 +114,10 @@ void load_data_if_available(void){      //Loads data, as long as there is data t
                                         //to the Arduino, thus overfilling the buffer until loadpoint
                                         //wraps around to the same location (aka value) as readpoint, will
                                         //cause output_data_if_ready() to think that the buffer is empty!
+                                        //The buffer is a ring because loadpoint and readpoint are both uint8_t,
+                                        //so they automatically wrap around when they go above 255, and no extra
+                                        //test/reset/whatever code is needed to make the buffer behave 
+                                        //like a nice ring.
                                                                                 
     databuffer[loadpoint] =             //To convert our two 8-bit bytes into a single uint16_t:
     
@@ -126,7 +145,7 @@ void output_data_if_ready(void){        //Outputs data, as long as:
     if((loadpoint - readpoint) != 0){   //and we actually have data to send. If we do,
       DACwrite(databuffer[readpoint]);  //we output the 16 bits at the current location of the read pointer,
       readpoint++;                      //move the pointer up one,
-      should_send = 0;                  //and say we shouldn't send data until timer2 overflows again.
+      should_send = 0;                  //and note that we shouldn't send more data until timer2 overflows again.
     }
   }
 }
