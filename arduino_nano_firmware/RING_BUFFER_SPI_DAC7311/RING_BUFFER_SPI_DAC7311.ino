@@ -198,8 +198,7 @@ void setup(){                   //This function configures our timer, buffer, an
                            
   TCCR2B |= 0x03;               //TCCR2B configuration:
   TCCR2B &= 0xF3;               //set clock prescaler (divider) to 32, so effective frequency is:
-                                //16000000_CPU_SPEED/(32_PRESCALER * 256_CLOCKS_TO_OVERFLOW) = 1,953.125 Hz, overflow every 512us    
-                                
+                                //16000000_CPU_SPEED/(32_PRESCALER * 256_CLOCKS_TO_OVERFLOW) = 1,953.125 Hz, overflow every 512us                                    
   
   TIMSK2 |= (1 << TOIE2);       //TIMSK2 (Timer Interrupt Mask 2) configuration:
                                 //enable overflow interrupt. Timer Overflow Inerrupt Enable 2(as in, the one for timer2)

@@ -17,6 +17,12 @@ def arrayinit():
     return
 
 arrayinit()
+
+listof256 = []
+for x in range (0,256):
+    listof256.append(2.001 - ((x%2)*4.0002) )
+
+
 ser = serial.Serial('COM6', 115200) # Establish the connection on a specific port
 sleep(3)
 
