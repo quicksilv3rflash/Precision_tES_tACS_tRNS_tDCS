@@ -2,14 +2,13 @@
 from time import sleep
 import serial
 import math
-import sys
+
 
 global listof256
 global txbuffer
 txbuffer = []
 
-def arrayinit():
-    
+def arrayinit():    
     global listof256
     listof256 = []
     for x in range (0, 256):
@@ -17,12 +16,6 @@ def arrayinit():
     return
 
 arrayinit()
-
-listof256 = []
-for x in range (0,256):
-    listof256.append(2.001 - ((x%2)*4.0002) )
-
-
 ser = serial.Serial('COM6', 115200) # Establish the connection on a specific port
 sleep(3)
 
@@ -108,24 +101,20 @@ def milliamps2dacwrite(milliamps):
 def loadtxbuffer():
     global txbuffer
     global listof256
-    for x in range(0,256):
+    for x in range(0, 256):
         txbuffer.append(milliamps2dacwrite(listof256[x]))
     return
 
-x=0
-while x<256:
+
+for x in range (0, 256):
     x+=1
-    ser.write(b"\x06\xF0")
-
-
+    ser.write(milliamps2dacwrite(0.0))
 
 while True:
     loadtxbuffer()
     tx1st256bytes()
     updatescreen()
     tx2nd256bytes()
-#    sys.exit()
-
 
 
 ##while true loop
