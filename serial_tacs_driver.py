@@ -21,7 +21,6 @@ ser = serial.Serial('COM6', 115200) # Establish the connection on a specific por
 sleep(3)
 
 def tx1st256bytes():
-    print("tx1st256bytes")
     done = 0
     
     while (done == 0):
@@ -55,7 +54,6 @@ def tx1st256bytes():
 
 
 def tx2nd256bytes():
-    print("tx2nd256bytes")
     done = 0
     
     while (done == 0):
@@ -97,13 +95,11 @@ def updatescreen():
 
 
 def milliamps2dacwrite(milliamps):
-    print("milliamps2dacwrite")
-    integer_write_value = int(round( (3.5715)*(2.5 - milliamps) ))
+    integer_write_value = int(round( (3.5715)*(2500.0 - (1000.0 * milliamps)) ))
     dacwrite = integer_write_value.to_bytes(2, byteorder="big", signed=False)
     return dacwrite
 
 def loadtxbuffer():
-    print("loadtxbuffer")
     global txbuffer
     global listof256
     for x in range(0,256):
@@ -122,6 +118,8 @@ while True:
     tx1st256bytes()
     updatescreen()
     tx2nd256bytes()
+#    sys.exit()
+
 
 
 ##while true loop
