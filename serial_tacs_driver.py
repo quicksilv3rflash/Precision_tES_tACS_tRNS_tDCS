@@ -22,7 +22,7 @@ sleep(3)
 #This function fills the entire 0.131072 seconds of buffer on the device.
 #It requires a list of 256 values in mA, sample rate one value per 512us.  
 def tx_256_mA_values(listof256_values_in_mA):      
-    data_to_transmit = []
+    data_to_transmit = [] 
     for x in range(0, 256):
         data_to_transmit.append(int(round((3.5715)*(2500.0-(1000.0*listof256_values_in_mA[x])))).to_bytes(2,byteorder="big",signed=False))
         #That horrible line of code converts mA values into correct format

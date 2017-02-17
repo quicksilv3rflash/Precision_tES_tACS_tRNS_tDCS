@@ -96,7 +96,7 @@ void load_data_if_available(void){      //Loads data, as long as there is data t
                  //   LOADING MORE DATA WILL OVERWRITE YOUR BUFFER!
                  //   IT DIRECTLY LOADS WHATEVER DATA IS AVAILABLE!
         //###############################################################
-                 
+                  
                                         //It is assumed that you will request data using
                                         //request_data_if_ready(), which checks that you have
                                         //enough remaining buffer capaciity...
