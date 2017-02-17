@@ -5,8 +5,8 @@ import math
 
 
 global listof256
-global txbuffer
-txbuffer = []
+
+
 
 def arrayinit():    
     global listof256
@@ -19,73 +19,25 @@ arrayinit()
 ser = serial.Serial('COM6', 115200) # Establish the connection on a specific port
 sleep(3)
 
-def tx1st256bytes():
-    done = 0
-    
-    while (done == 0):
+#This function fills the entire 0.131072 seconds of buffer on the device.
+#It requires a list of 256 values in mA, sample rate one value per 512us.  
+def tx_256_mA_values(listof256_values_in_mA):      
+    data_to_transmit = []
+    for x in range(0, 256):
+        data_to_transmit.append(int(round((3.5715)*(2500.0-(1000.0*listof256_values_in_mA[x])))).to_bytes(2,byteorder="big",signed=False))
+        #That horrible line of code converts mA values into correct format
+        #for the DAC. First it runs the values through the linear equation
+        #that converts them to appropriate DAC values, then it ensures the
+        #data are formatted in 16-bit unsigned integers; then, we transmit
+        #the data in eight 64-byte blocks.    
+    index = 0
+    while (index < 8):
         if (ser.inWaiting() > 0):
-            for x in range (0, 32):
-                ser.write(txbuffer[x])
+            for x in range(32*index,(32*index + 32)):
+                ser.write(data_to_transmit[x])
             ser.read(ser.inWaiting())
-            done += 1
-            
-    while (done == 1):
-        if (ser.inWaiting() > 0):
-            for x in range (32, 64):
-                ser.write(txbuffer[x])
-            ser.read(ser.inWaiting())
-            done += 1
-            
-    while (done == 2):
-        if (ser.inWaiting() > 0):
-            for x in range (64, 96):
-                ser.write(txbuffer[x])
-            ser.read(ser.inWaiting())
-            done += 1
-            
-    while (done == 3):
-        if (ser.inWaiting() > 0):
-            for x in range (96, 128):
-                ser.write(txbuffer[x])
-            ser.read(ser.inWaiting())
-            done += 1
+            index += 1
     return
-
-
-def tx2nd256bytes():
-    done = 0
-    
-    while (done == 0):
-        if (ser.inWaiting() > 0):
-            for x in range (128, 160):
-                ser.write(txbuffer[x])
-            ser.read(ser.inWaiting())
-            done += 1
-            
-    while (done == 1):
-        if (ser.inWaiting() > 0):
-            for x in range (160, 192):
-                ser.write(txbuffer[x])
-            ser.read(ser.inWaiting())
-            done += 1
-            
-    while (done == 2):
-        if (ser.inWaiting() > 0):
-            for x in range (192, 224):
-                ser.write(txbuffer[x])
-            ser.read(ser.inWaiting())
-            done += 1
-            
-    while (done == 3):
-        if (ser.inWaiting() > 0):
-            for x in range (224, 256):
-                ser.write(txbuffer[x])
-            ser.read(ser.inWaiting())
-            done += 1
-    return    
-
-
-    
 
 
 def updatescreen():
@@ -93,28 +45,10 @@ def updatescreen():
 
 
 
-def milliamps2dacwrite(milliamps):
-    integer_write_value = int(round( (3.5715)*(2500.0 - (1000.0 * milliamps)) ))
-    dacwrite = integer_write_value.to_bytes(2, byteorder="big", signed=False)
-    return dacwrite
-
-def loadtxbuffer():
-    global txbuffer
-    global listof256
-    for x in range(0, 256):
-        txbuffer.append(milliamps2dacwrite(listof256[x]))
-    return
-
-
-for x in range (0, 256):
-    x+=1
-    ser.write(milliamps2dacwrite(0.0))
-
 while True:
-    loadtxbuffer()
-    tx1st256bytes()
+    tx_256_mA_values(listof256)
     updatescreen()
-    tx2nd256bytes()
+    #tx2nd256bytes()
 
 
 ##while true loop
