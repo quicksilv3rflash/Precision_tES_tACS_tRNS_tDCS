@@ -3,6 +3,7 @@ DAC write code  | OUTPUT current
 0x051A		| -0.35mA
 0x0550		| -0.37mA
 0x0590		| -0.39mA
+--0x05A0 +/-AMBER LED ON, POSITIVE RAIL ON--
 0x05B0		| +2.08mA
 0x05F0		| +2.06mA
 0x06D0		| +2.00mA
@@ -12,5 +13,6 @@ DAC write code  | OUTPUT current
 0x3F00		| -2.01mA
 0x3FA0		| -2.06mA
 0x3FD0		| -2.07mA
-0x3FFF		| -2.09mA (Double-check this value after replacing multimeter battery and watch carefully for stability over 10 minute period)
-
+0x3FFF		| -2.09mA
+Hours of stability testing show device DAC->I_OUT is almost perfectly linear
+and matches the theoretical equation with about 1% tolerance
