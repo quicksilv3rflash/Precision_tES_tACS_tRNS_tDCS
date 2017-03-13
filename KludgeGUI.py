@@ -5,15 +5,14 @@
 #accurately with an oscilloscope. The GUI also reflects the artifacts
 #that appear in the device's output waveform as frequency increases  ^.^
 
-#THIS ONLY WORKS IF COM6 IS YOUR SERIAL PORT WITH THE ARDUINO CONNECTED!
-whichport = "COM6"
-#MODIFY THE LINE ABOVE TO MATCH YOUR SERIAL PORT'S PROPER IDENTIFIER
+whichport = input("Enter the serial port location the Arduino is connected to,\nfor example, COM6. This location is displayed in the Arduino IDE\nunder Tools>PORT:")
 
 #certified tested + functional 2017-02-26 04h55
 #SYSTEM DEVELOPED ON SOFTWARE VERSIONS:
 # * Arduino 1.8.1
 # * Python 3.2.5
 # * PySerial 2.6
+# * PyGame 1.9.2
 # * SYSTEM DEVELOPED ON ARDUINO HARDWARE: 
 # * "MINI USB Nano V3.0 ATmega328P CH340G 5V 16M"
 # */ <- lol C comment fragments
