@@ -12,7 +12,7 @@ whichport = input("Enter the serial port location the Arduino is connected to,\n
 # * Arduino 1.8.1
 # * Python 3.2.5
 # * PySerial 2.6
-# * PyGame 1.9.2
+# * PyGame 1.9.2pre
 # * SYSTEM DEVELOPED ON ARDUINO HARDWARE: 
 # * "MINI USB Nano V3.0 ATmega328P CH340G 5V 16M"
 # */ <- lol C comment fragments
