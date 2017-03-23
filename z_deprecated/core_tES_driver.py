@@ -1,6 +1,6 @@
 
 
-whichport = input("Enter the serial port location the Arduino is connected to,\nfor example, COM6. This location is displayed in the Arduino IDE\nunder Tools>PORT:")
+whichport = input("Enter the serial port location the Arduino is connected to,\nfor example, COM6. This location is displayed in the Arduino IDE\nunder Tools>PORT:  ")
 
 
 #SYSTEM DEVELOPED ON SOFTWARE VERSIONS:
@@ -18,7 +18,7 @@ from time import sleep
 
 
 
-#generate waveform produces sine, square, triangle, ramp_up
+#generate waveform produces sine, square, triangle, ramp_up, ramp_down, and random.
 #offset = dc bias
 def generate_wave_points(waveform,frequency,amplitude,offset):
     if(offset > 2.002):
@@ -67,7 +67,7 @@ def generate_wave_points(waveform,frequency,amplitude,offset):
             wave_list[x] = -2.001
     
     return wave_list
-
+#the returned wave_list is a discretized version of the desired waveform sampled at 512us per sample
 
 
 
@@ -118,19 +118,20 @@ sleep(2)    #wait 2 seconds for the connection to settle
 ticks = 0
 
 
-acdc = input("\n TYPE _AC_   OR    _DC_\n")
+acdc = input("\n TYPE AC   OR    DC\n")
 
 if (acdc == "DC"):
     currentvalue = input("\n enter current value in mA\n")
     ser.write(mA_2_DAC_write(float(currentvalue)))
+    print("\nDC current value set.\n")
 
 if (acdc == "AC"):
-    waveform = input("\n enter waveform _sine square triangle ramp up ramp down random")
-    frequency = input ("\n enter frequency")
-    amplitude 
-    offset
-    wave_points = generate_wave_points("sine",0.1,0.5,0)
-    print("\nREMEMBER THE PROGRAM WILL HANG HERE IF YOU SELECTED A PERIODIC WAVEFORM\n")
+    waveform = input("\n enter waveform: sine, square, triangle, ramp_up, ramp_down, random:  ")
+    frequency = input("\n enter frequency, Hz:  ")
+    amplitude = input("\n enter amplitude, mA:  ")
+    offset = input("\n enter DC offset, mA:  ")
+    wave_points = generate_wave_points(waveform, float(frequency), float(amplitude), float(offset))
+    print("\nREMEMBER: THE PROGRAM WILL HANG HERE IF YOU SELECTED A PERIODIC WAVEFORM\n")
     initializebuffer()
     while True:
         listlength = len(wave_points)
