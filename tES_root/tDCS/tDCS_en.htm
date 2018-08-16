@@ -1,0 +1,230 @@
+<DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Transcranial Direct Current Stimulation</title>
+
+</head>
+
+
+
+<body>
+<p>.......................................</p>
+<p>Transcranial Direct Current Stimulation</p>
+<p>.......................................</p>
+<p> </p>
+<p><img src="tdcs_operator.jpg"></p>
+<p> </p>
+<p> </p>
+<p>================================</p>
+<p>INTRODUCTION</p>
+<p>================================</p>
+<p> </p>
+<p> </p>
+<p>This Instructable got cited by a reputable source (<a href="http://neuron.mefst.hr/docs/CMJ/issues/2016/57/4/cmj_57_4_erhard_27586554.pdf">pdf
+link</a>)! Citation #10 in the paper &quot;New tools for
+neuroenhancement - what about neuroethics?&quot;(<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5048227/">html
+link</a>) Croat Med J. 2016 Aug; 57(4): 392-394. doi:
+10.3325/cmj.2016.57.392 ------- Some concern about the ethics of this
+sort of activity, warnings about changes in personality and hormones
+as a result of use of tDCS. So I added some warnings.</p>
+<p><br/>
+<a href="http://tdcsplacements.com/">Site for different tDCS
+placements and effects.</a></p>
+<p>View this project in the context of my life and intent <a href="http://www.neuroplustech.com/miscellany/cache/completed/basic_tDCS.htm">on
+my own site here</a> if you wish.</p>
+<p>Edit: <a href="https://www.instructables.com/id/Transcranial-Electrical-Stimulator-Arduino-Compati/">If
+you want hardware to do tACS and tRNS in addition to tDCS, I've built
+some of that too</a>.</p>
+<p>I was surprised and pleased to learn that human enhancement
+technologies not only exist, but are within the reach of the basic
+electronic hobbyist. This instructable is (of course) for educational
+purposes only and you may be violating local laws by constructing
+and/or using the device described here. The author of this
+instructable is not liable for the burns, permanent neurological
+damage, or other personal injury up to and including insanity and/or
+seizures and/or dismemberment and/or immolation and/or death that may
+result from building and using the device described here.</p>
+<p>Transcranial Direct Current Stimulation (tDCS) is a method of
+external neural modulation that uses a small current run through the
+brain in order to alter cortical excitability. The details of the
+mechanism of action and exact enhancements possible are beyond the
+scope of this article, but <a href="http://www.fisherwallace.com/">you
+can examine commercially available products</a>, and look at <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2754807/">safety
+data</a> and <a href="http://www.sciencedirect.com/science/article/pii/S0960982212000140">ethical
+reviews</a> before deciding if this is something you would like to
+pursue. Some google scholar searches will <a href="https://scholar.google.com/scholar?q=tDCS+numerical+competence&amp;btnG=&amp;hl=en&amp;as_sdt=0%2C3">turn
+up</a> interesting <a href="https://scholar.google.com/scholar?q=tDCS+depression&amp;btnG=&amp;hl=en&amp;as_sdt=0%2C3">things</a>
+too.</p>
+<p>The first photo on this page is from <a href="http://www.pbs.org/wgbh/nova/body/boost-kids-brainpower.html">this
+article</a>.</p>
+<p> </p>
+<p>================================</p>
+<p>CIRCUIT PRINCIPLE OF OPERATION</p>
+<p>================================</p>
+<p> </p>
+<p><img src="tdcs_theory.jpg"></p>
+<p> </p>
+<p>If you don't wish to consider the theoretical basis for the
+operation of this circuit, skip this step.<br/>
+<br/>
+The circuit
+shown is a regulated current sink. You may find it a useful building
+block in your future projects. It regulates the current through R[L],
+preventing it from exceeding a set value. This circuit doesn't have
+active drive capacity, though, and so V[DRIVE] must be large enough
+to drive the desired current through R[L].<br/>
+<br/>
+The current
+through R[L] is equal to I[C].&nbsp; I[C] is roughly equal to (
+V[REF] - (V[BE] of T1) ) / R[LIM] .<br/>
+<br/>
+To see where this
+equation originates, begin by noting that the sum of the voltages
+around the loop formed by V[REF], the base-emitter junction of T1,
+and R[LIM] must be zero (by Kirchhoff's voltage law):<br/>
+V[REF] -
+V[BE] - V[RLIM] = 0<br/>
+so<br/>
+V[RLIM] = V[REF] - V[BE] .<br/>
+<br/>
+The
+current through R[LIM] (also known as I[E]) is defined by Ohm's law,
+and we can substitute using the previous equation:<br/>
+I[E] =
+V[RLIM] / R[LIM] = (V[REF] - V[BE] ) / R[LIM] .<br/>
+<br/>
+Ignoring
+the base current,<br/>
+I[C] = I[E] ,<br/>
+so the current through the
+load resistor is approximately defined by<br/>
+I[LOAD] = I[C] =
+(V[REF] - V[BE] ) / R[LIM] .<br/>
+<br/>
+If you wish to include the
+effects of the base current of the transistor, you must also factor
+in the current gain of the transistor, h[FE].<br/>
+Viewing the
+transistor as a node, by Kirchhoff's current law,<br/>
+0 = I[C] +
+I[B] - I[E]<br/>
+so<br/>
+I[B] = I[E] - I[C] .<br/>
+<br/>
+We know that
+h[FE] is the factor we can multiply by I[B] to find our I[C].
+Thus,<br/>
+I[B] * h[FE] = I[C] .<br/>
+<br/>
+Substituting for I[B]
+from a previous equation,<br/>
+(I[E] - I[C]) * h[FE] = I[C]
+.<br/>
+<br/>
+Solving for I[C],<br/>
+I[C] = I[E] - (I[E] /(1 + h[FE] )
+) ,<br/>
+and since I[E] = (V[REF] - V[BE] ) / R[LIM] ,<br/>
+the exact
+equation then becomes:<br/>
+<br/>
+I[C] = ((V[REF] - V[BE] ) / R[LIM]
+) - (((V[REF] - V[BE] ) / R[LIM] ) / (1 + h[FE] ) ) .</p>
+<p> </p>
+<p>================================</p>
+<p>PRACTICAL ASSEMBLY</p>
+<p>================================</p>
+<p> </p>
+<p><img src="tdcs_practical.jpg"></p>
+<p> </p>
+<p>This is the schematic of a working 2mA current supply that may be
+used for tDCS. It is based on the transistor regulator described in
+the previous step. Parts were added to allow on/off functionality, on
+state indication, and redundant safety measures.<br/>
+<br/>
+---PARTS
+LIST---<br/>
+B1: 4 9V battery clips, series configuration (add 9V
+batteries to provide power)<br/>
+<br/>
+S1: SPST switch<br/>
+<br/>
+D1:
+indicator LED<br/>
+<br/>
+D2-D4: 1n400x (I used 1n4003)<br/>
+<br/>
+T1:
+TIP31C (or TIP29C)<br/>
+<br/>
+R1,R2: 12 kohm 250mW<br/>
+R3,R4: 2.2
+kohm 250mW<br/>
+R5: 560 ohm 250mW<br/>
+R6:100 ohm 250mW<br/>
+<br/>
+Wires
+and gel electrodes are easiest to find sold for TENS devices, but
+will allow tDCS, though only in areas that are hairless. There are
+other options, though, and <a href="https://www.reddit.com/r/tDCS/comments/4qx8ic/psa_sticky_electrodes_and_skin_burns/">sponge
+electrodes are less likely to cause electrode burns.</a></p>
+<p>Original suggestion at the initial time of writing, the cheapest,
+but can only be used over hairless skin and may be more likely to
+cause skin irritation and minor damage:<br/>
+W1: electrode leads
+(such as these TENS leads)</p>
+<p>A search for &quot;TENS electrode leads&quot; will find the
+appropriate type</p>
+<p><a href="http://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&amp;field-keywords=TENS+leads">http://www.amazon.com/s/ref=nb_sb_noss_1?url=searc...</a></p>
+<p>E1,E2: gel electrode pads (also sold for TENS units)</p>
+<p>Search for &quot;TENS gel electrodes&quot;, I recommend 2&quot; x
+2&quot; square gel electrodes</p>
+<p><a href="http://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&amp;field-keywords=TENS+electrodes&amp;rh=i%3Aaps%2Ck%3ATENS+electrodes">http://www.amazon.com/s/ref=nb_sb_noss_1?url=searc...</a></p>
+<p>New suggestion 1: <a href="http://www.ebay.com/itm/tDCS-Medical-Sponge-1pair/291406222763">sponge
+electrodes that are compatible with 2mm pin connectors</a> instead of
+gel electrodes. That's an ebay link, though, posted 2016-10-24, and
+it may not remain live / I can't find any other sellers with 2mm
+compatible sponge electrodes at the moment.</p>
+<p>New suggestion 2: Banana plugs instead of TENS electrodes leads
+and <a href="https://www.amazon.com/Amrex-3-x3-Electrode-Caputron/dp/B00SDLU6KM/">Amrex
+sponge electrodes</a>. Those sponge electrodes are $20 each, though,
+instead of $10 for a pair like new suggestion 1.</p>
+<p>New suggestion 3: Someone who followed this design (Instructables username ElChevere) used spoons and kitchen sponges for electrodes. Of this I wholeheartedly approve, since it's probably the cheapest / most efficient way to get sponge electrodes with commonly available parts
+:)</p>
+<p>Image below:</p>
+<p><img src="tdcs_final_iii.jpg"></p>
+Perfboard is best for assembling this circuit
+permanently.<br/>
+Hot-melt glue is useful for gluing wires in place
+to prevent strain.</p>
+<p> </p>
+<p>================================</p>
+<p>TESTING AND QUALITY VERIFICATION</p>
+<p>================================</p>
+<p> </p>
+<p><img src="tdcs_final_i.jpg"></p>
+<p> </p>
+<p><img src="tdcs_final_ii.jpg"></p>
+<p> </p>
+<p>Once your device is constructed, you should test it before
+adhering it to your head and torso and activating it. Check the
+short-circuit output current with an ammeter. The value should be 2
+mA +/- 10%.<br/>
+<br/>
+Have fun. Try to get better.<br/>
+<br/>
+Look
+into <a href="http://www.neuroplustech.com/nootropics/piracetam_summary.html">piracetam</a>
+but remember that it seems to work best when taken with supplemental
+<a href="http://www.neuroplustech.com/nootropics/choline.html">choline</a>.<br/>
+<br/>
+Good
+luck.</p>
+
+<p><a href="../default.htm">Back to transcranial electrical stimulation home page</a></p>
+
+</body>
+</html>
